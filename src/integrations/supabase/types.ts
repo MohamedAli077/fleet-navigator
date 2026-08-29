@@ -216,6 +216,208 @@ export type Database = {
           },
         ]
       }
+      disruptions: {
+        Row: {
+          added_delay_min: number
+          affected_bus_ids: string[]
+          affected_crew_ids: string[]
+          affected_trips: number
+          created_at: string
+          description: string | null
+          disruption_type: string
+          duration_min: number
+          id: string
+          impact: Json
+          location: string | null
+          passengers_impacted: number
+          recovered_trips: number
+          recovery_rate_pct: number
+          reference: string
+          resolved_at: string | null
+          route_number: string
+          severity: string
+          start_min: number
+          status: string
+          unrecovered_trips: number
+          updated_at: string
+        }
+        Insert: {
+          added_delay_min?: number
+          affected_bus_ids?: string[]
+          affected_crew_ids?: string[]
+          affected_trips?: number
+          created_at?: string
+          description?: string | null
+          disruption_type: string
+          duration_min: number
+          id?: string
+          impact?: Json
+          location?: string | null
+          passengers_impacted?: number
+          recovered_trips?: number
+          recovery_rate_pct?: number
+          reference: string
+          resolved_at?: string | null
+          route_number: string
+          severity: string
+          start_min: number
+          status?: string
+          unrecovered_trips?: number
+          updated_at?: string
+        }
+        Update: {
+          added_delay_min?: number
+          affected_bus_ids?: string[]
+          affected_crew_ids?: string[]
+          affected_trips?: number
+          created_at?: string
+          description?: string | null
+          disruption_type?: string
+          duration_min?: number
+          id?: string
+          impact?: Json
+          location?: string | null
+          passengers_impacted?: number
+          recovered_trips?: number
+          recovery_rate_pct?: number
+          reference?: string
+          resolved_at?: string | null
+          route_number?: string
+          severity?: string
+          start_min?: number
+          status?: string
+          unrecovered_trips?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      scenarios: {
+        Row: {
+          applied: boolean
+          applied_at: string | null
+          created_at: string
+          id: string
+          input: Json
+          label: string
+          result: Json
+          updated_at: string
+        }
+        Insert: {
+          applied?: boolean
+          applied_at?: string | null
+          created_at?: string
+          id?: string
+          input?: Json
+          label: string
+          result?: Json
+          updated_at?: string
+        }
+        Update: {
+          applied?: boolean
+          applied_at?: string | null
+          created_at?: string
+          id?: string
+          input?: Json
+          label?: string
+          result?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      trip_assignments: {
+        Row: {
+          bus_id: string | null
+          bus_label: string | null
+          conductor_id: string | null
+          conductor_name: string | null
+          created_at: string
+          delay_min: number
+          depot: string
+          destination: string | null
+          disruption_id: string | null
+          driver_id: string | null
+          driver_name: string | null
+          end_min: number
+          id: string
+          origin: string | null
+          route_number: string
+          same_depot: boolean
+          source: string
+          start_min: number
+          trip_code: string
+          trip_id: string
+          updated_at: string
+        }
+        Insert: {
+          bus_id?: string | null
+          bus_label?: string | null
+          conductor_id?: string | null
+          conductor_name?: string | null
+          created_at?: string
+          delay_min?: number
+          depot: string
+          destination?: string | null
+          disruption_id?: string | null
+          driver_id?: string | null
+          driver_name?: string | null
+          end_min: number
+          id?: string
+          origin?: string | null
+          route_number: string
+          same_depot?: boolean
+          source?: string
+          start_min: number
+          trip_code: string
+          trip_id: string
+          updated_at?: string
+        }
+        Update: {
+          bus_id?: string | null
+          bus_label?: string | null
+          conductor_id?: string | null
+          conductor_name?: string | null
+          created_at?: string
+          delay_min?: number
+          depot?: string
+          destination?: string | null
+          disruption_id?: string | null
+          driver_id?: string | null
+          driver_name?: string | null
+          end_min?: number
+          id?: string
+          origin?: string | null
+          route_number?: string
+          same_depot?: boolean
+          source?: string
+          start_min?: number
+          trip_code?: string
+          trip_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trip_assignments_bus_id_fkey"
+            columns: ["bus_id"]
+            isOneToOne: false
+            referencedRelation: "buses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "trip_assignments_conductor_id_fkey"
+            columns: ["conductor_id"]
+            isOneToOne: false
+            referencedRelation: "crew"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "trip_assignments_driver_id_fkey"
+            columns: ["driver_id"]
+            isOneToOne: false
+            referencedRelation: "crew"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
