@@ -10,6 +10,7 @@ import {
   type BusRecord,
   type CrewRecord,
   type DisruptionInput,
+  type DisruptionImpact,
   type ScenarioInput,
 } from "@/lib/ops-engine";
 
@@ -59,7 +60,7 @@ export interface DisruptionRow {
   recovery_rate_pct: number;
   added_delay_min: number;
   passengers_impacted: number;
-  impact: Record<string, unknown>;
+  impact: DisruptionImpact;
   resolved_at: string | null;
   created_at: string;
 }
@@ -324,7 +325,7 @@ export async function doCreateDisruption(input: DisruptionInput & { location?: s
       recovery_rate_pct: impact.recoveryRatePct,
       added_delay_min: impact.addedDelayMin,
       passengers_impacted: impact.passengersImpacted,
-      impact: impact as unknown as Record<string, unknown>,
+      impact: impact as unknown as never,
     })
     .select()
     .single();
